@@ -37,6 +37,14 @@ public class MainActivity2 extends AppCompatActivity {
                 dataView.setText(msg);
 
             }
+
+            //---get the custom object passed in---
+            Person obj = (Person) getIntent().getSerializableExtra("MyObject");
+            if (obj!=null) {
+                Toast.makeText(this, obj.Name(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, obj.Email(), Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 
@@ -49,6 +57,13 @@ public class MainActivity2 extends AppCompatActivity {
 
          Intent i = new Intent();
          i.putExtra("msg_from_activity_two", "I said hello!");
+
+         //adding a custom object that is parceable
+
+         Fruit apple = new Fruit("Apple", "Red", 3);
+         i.putExtra("myfruit", apple);
+
+
          setResult(RESULT_OK,i);
          super.finish();
 

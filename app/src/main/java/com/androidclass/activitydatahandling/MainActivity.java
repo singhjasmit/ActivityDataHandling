@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -73,6 +74,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                b.putString("msg_from_activity_one", "I am sending you some data from btn 3");
                b.putInt("count", 3);
                i.putExtras(b);
+
+               //---create my own custom object that is serializable---
+               Person myObject = new Person();
+               myObject.setName("Jasmit Singh");
+               myObject.setEmail("singh.jasmit@gmail.com");
+               i.putExtra("MyObject", myObject);
+
+
                startActivityForResult(i, MY_REQ_CODE);
                break;
 
@@ -103,7 +112,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String msg = b.getString("msg_from_activity_two");
                 if (dataView!=null) dataView.setText(msg);
 
-    //            Toast.makeText(getBaseContext(), msg, Toast.LENGTH_LONG).show() ;
+                Fruit myFruit = data.getParcelableExtra("myfruit");
+
+                if (myFruit !=null) {
+                    Toast.makeText(this, myFruit.toString(),
+                            Toast.LENGTH_SHORT).show();
+                }
 
             }
         }
